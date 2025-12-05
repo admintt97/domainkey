@@ -1,161 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <title>Admin Panel</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: black;
-            color: white;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3 Sayfa Sistemi</title>
 
-        .page {
-            display: none;
-            padding: 20px;
-        }
+<style>
+    body {
+        font-family: Arial;
+        margin: 0;
+        padding: 0;
+        background: #111;
+        color: white;
+        text-align: center;
+    }
 
-        .active {
-            display: block;
-        }
+    .page {
+        display: none;
+        padding: 20px;
+    }
 
-        button {
-            background-color: #333;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            margin: 10px;
-            font-size: 18px;
-            border-radius: 6px;
-        }
+    img {
+        width: 100%;
+        max-width: 450px;
+        display: block;
+        margin: auto;
+        border-radius: 10px;
+    }
 
-        button:hover {
-            background-color: #555;
-            cursor: pointer;
-        }
+    h1 {
+        font-size: 32px;
+        margin-bottom: 15px;
+    }
 
-        input {
-            padding: 10px;
-            width: 220px;
-            margin: 8px;
-            border-radius: 5px;
-        }
+    /* Büyük input */
+    input {
+        width: 80%;
+        max-width: 350px;
+        padding: 15px;
+        font-size: 20px;
+        border-radius: 10px;
+        border: none;
+        margin-bottom: 15px;
+    }
 
-        img {
-            width: 70%;
-            margin-top: 20px;
-        }
+    /* Büyük buton */
+    button {
+        padding: 15px 25px;
+        font-size: 22px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        background: #0084ff;
+        color: white;
+        margin-top: 20px;
+    }
 
-        .keyBox {
-            background-color: #222;
-            padding: 10px;
-            border-radius: 6px;
-            margin-top: 10px;
-            display: inline-block;
-        }
-    </style>
+    button:hover {
+        background: #0066cc;
+    }
+
+    /* Key kutusu */
+    .keybox {
+        background: #222;
+        padding: 20px;
+        margin: 20px auto;
+        width: 80%;
+        max-width: 400px;
+        border-radius: 12px;
+        font-size: 22px;
+        border: 2px solid #555;
+        word-break: break-all;
+    }
+</style>
+
+<script>
+    function goPage(num) {
+        document.querySelectorAll('.page').forEach(p => p.style.display = "none");
+        document.getElementById("page" + num).style.display = "block";
+    }
+
+    function generateKey() {
+        let key = "KEY-" + Math.random().toString(36).substring(2, 12).toUpperCase();
+        document.getElementById("genKeyBox").innerText = key;
+    }
+
+    function freeKey() {
+        document.getElementById("freeKeyBox").innerText = "FREE-KEY-123456";
+    }
+</script>
+
 </head>
-<body>
-
-<!-- LOGIN SAYFASI -->
-<div id="loginPage" class="page active">
-    <h1>Admin Login</h1>
-    <input id="loginUser" placeholder="Login"><br>
-    <input id="loginPass" placeholder="Password" type="password"><br>
-    <button onclick="login()">Giriş Yap</button>
-</div>
+<body onload="goPage(1)">
 
 <!-- 1. SAYFA -->
 <div id="page1" class="page">
-    <h1>1. Sayfa</h1>
-    <img src="https://i.ibb.co/P6YqvJr/IMG-20250114-024523.jpg">
+    <h1>Giriş</h1>
+
+    <img src="https://i.imgur.com/J3Z4b8V.jpeg">
+
+    <br>
+    <input type="text" placeholder="Login">
+    <br>
+    <input type="password" placeholder="Password">
+
     <br><br>
-    <button onclick="goPage(2)">2. Sayfaya Geç</button>
+    <button onclick="goPage(2)">Giriş Yap</button>
 </div>
 
 <!-- 2. SAYFA -->
 <div id="page2" class="page">
     <h1>2. Sayfa</h1>
-    <p>Burada istediğin tasarım olur.</p>
+
+    <img src="https://i.imgur.com/J3Z4b8V.jpeg">
+
+    <button onclick="generateKey()">Generate Key</button>
+    <div id="genKeyBox" class="keybox">Key burada görünecek</div>
+
+    <button onclick="freeKey()">Free Key</button>
+    <div id="freeKeyBox" class="keybox">Boş</div>
+
     <button onclick="goPage(3)">3. Sayfaya Geç</button>
 </div>
 
-<!-- 3. SAYFA - KEY GENERATOR -->
+<!-- 3. SAYFA -->
 <div id="page3" class="page">
-    <h1>Key Generator</h1>
+    <h1>3. Sayfa</h1>
 
-    <select id="keyType">
-        <option value="free">Free Key</option>
-        <option value="1h">1 Hour - 1$</option>
-        <option value="1d">1 Day - 3$</option>
-        <option value="7d">1 Week - 12$</option>
-        <option value="1m">1 Month - 25$</option>
-    </select>
-    <br><br>
+    <img src="https://i.imgur.com/VPt8cWc.jpeg">
 
-    <button onclick="generateKey()">Generate Key</button>
+    <div class="keybox">
+        Buraya özel key veya mesaj ekleyebilirsin<br>
+        Boyut tamamen büyütüldü
+    </div>
 
-    <div id="result" class="keyBox"></div>
+    <button onclick="goPage(1)">Başa Dön</button>
 </div>
-
-
-<script>
-
-function goPage(num) {
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-    document.getElementById("page" + num).classList.add("active");
-}
-
-function login() {
-    let user = document.getElementById("loginUser").value;
-    let pass = document.getElementById("loginPass").value;
-
-    if (user === "Admin97" && pass === "Admin1997") {
-        document.getElementById("loginPage").classList.remove("active");
-        document.getElementById("page1").classList.add("active");
-    } else {
-        alert("Yanlış Login veya Password!");
-    }
-}
-
-function randomLetters(length) {
-    let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let out = "";
-    for (let i = 0; i < length; i++) out += chars[Math.floor(Math.random() * chars.length)];
-    return out;
-}
-
-function generateKey() {
-    let type = document.getElementById("keyType").value;
-    let code = "";
-
-    if (type === "free") {
-        code = "Admin-FREE-" + randomLetters(4);
-    }
-
-    if (type === "1h") {
-        code = "Admin-3H-" + randomLetters(6);
-    }
-
-    if (type === "1d") {
-        code = "Admin-1D-" + randomLetters(6);
-    }
-
-    if (type === "7d") {
-        code = "Admin-7W-" + randomLetters(6);
-    }
-
-    if (type === "1m") {
-        code = "Admin-1M-" + randomLetters(6);
-    }
-
-    document.getElementById("result").innerHTML = code;
-}
-
-</script>
 
 </body>
 </html>
