@@ -1,46 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="az">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mənim Saytım</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domain Checker</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             background: #f4f4f4;
-            margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
             text-align: center;
+            padding: 50px;
         }
-        header {
-            background: #222;
-            color: #fff;
+        .box {
+            background: white;
             padding: 20px;
-            font-size: 24px;
+            width: 90%;
+            max-width: 400px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        .content {
-            margin-top: 40px;
-            font-size: 20px;
+        input, button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
         }
-        footer {
-            margin-top: 50px;
-            padding: 20px;
-            background: #222;
-            color: #fff;
+        button {
+            background: black;
+            color: white;
+            border: none;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <header>
-        Xoş gəldiniz!
-    </header>
-
-    <div class="content">
-        Bu GitHub Pages ilə yaradılmış sadə bir saytdır.
+    <div class="box">
+        <h2>Domain Checker</h2>
+        <input id="domain" type="text" placeholder="Məs: example.com">
+        <button onclick="checkDomain()">Yoxla</button>
+        <p id="result"></p>
     </div>
 
-    <footer>
-        © 2025 - Sizin saytınız
-    </footer>
-</body>
-</html>
+    <script>
+        function checkDomain() {
+            let domain = document.getElementById("domain").value.trim();
+            if (!domain) {
+                document.getElementById("result").innerText = "Domain daxil edin.";
+                return;
+            }
+            document.getElementById("result").innerText = "Y
