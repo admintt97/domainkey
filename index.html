@@ -28,9 +28,8 @@
         
         /* --- ARKA PLAN GÖRSELLERİ --- */
         .bg-page-1 { background-image: url('altin-karakter.jpg'); }
-        /* Sayfa 2 (Key Seçimi) - PUBG Miğferli Görseli korundu */
         .bg-page-2 { background-image: url('pubg-miğfer.jpg'); } 
-        /* DÜZELTME: Sayfa 3A ve 3B için yeni arka plan (Mumya Karakterleri) */
+        /* Sayfa 3A ve 3B için Mumya karakterleri görseli */
         .bg-page-3a-new { background-image: url('mumya-karakter.jpg'); opacity: 0.5; } 
         .bg-page-3b-new { background-image: url('mumya-karakter.jpg'); opacity: 0.5; }
 
@@ -128,6 +127,52 @@
             border: 1px solid #ffd700; border-radius: 5px; cursor: pointer;
             z-index: 15; font-weight: 700; font-family: 'Orbitron', sans-serif;
         }
+        
+        /* --- YENİ LİSTELEME BUTONLARI (Key Süreleri) --- */
+        .duration-list {
+            display: flex;
+            flex-direction: column;
+            gap: 5px; 
+            margin-bottom: 15px;
+        }
+
+        .duration-item {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: rgba(40, 40, 40, 0.9);
+            color: #ffd700;
+            font-size: 1em;
+            font-weight: 700;
+            border-radius: 3px;
+            text-align: left;
+            cursor: pointer;
+            border: 2px solid #555;
+            transition: background-color 0.2s, border-color 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .duration-item:hover {
+            background-color: rgba(60, 60, 60, 0.9);
+        }
+
+        .duration-item.selected {
+            background-color: #00bcd4; /* Seçildiğinde açık mavi */
+            color: #000;
+            border-color: #00c0ff;
+            box-shadow: 0 0 10px rgba(0, 188, 212, 0.8);
+        }
+        
+        .duration-price {
+            font-weight: 400;
+            font-size: 0.9em;
+            color: #ccc;
+        }
+        
+        .duration-item.selected .duration-price {
+            color: #000;
+        }
     </style>
 </head>
 <body>
@@ -185,18 +230,32 @@
                 <form class="key-form" onsubmit="event.preventDefault()">
                     <div class="form-row">
                         <label>GAMES</label>
-                        <select class="form-input"><option>PUBG Mobile</option></select>
+                        <select id="premium-game-select" class="form-input"><option>PUBG Mobile</option></select>
                     </div>
 
                     <div class="form-row">
                         <label>DURATION</label>
-                        <select id="premium-duration-select" class="form-input" onchange="updateTotalPrice()">
-                            <option value="1" data-price="1">-- ($1)</option>
-                            <option value="1Day" data-price="3">1 Day ($3)</option>
-                            <option value="1Week" data-price="12">1 Week ($12)</option>
-                            <option value="1Month" data-price="30">1 Month ($30)</option>
-                        </select>
+                        <div id="premium-duration-list" class="duration-list">
+                            <div class="duration-item selected" data-value="1" data-price="1" onclick="selectDuration(this, 'premium')">
+                                <span>--</span>
+                                <span class="duration-price">$1</span>
+                            </div>
+                            <div class="duration-item" data-value="1Day" data-price="3" onclick="selectDuration(this, 'premium')">
+                                <span>1 Day (gün)</span>
+                                <span class="duration-price">$3</span>
+                            </div>
+                            <div class="duration-item" data-value="1Week" data-price="12" onclick="selectDuration(this, 'premium')">
+                                <span>1 Week (hafta)</span>
+                                <span class="duration-price">$12</span>
+                            </div>
+                            <div class="duration-item" data-value="1Month" data-price="30" onclick="selectDuration(this, 'premium')">
+                                <span>1 Month (Ay)</span>
+                                <span class="duration-price">$30</span>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <input type="hidden" id="premium-selected-value" value="1" data-price="1">
 
                     <div class="form-row">
                         <label>MAX DEVICES</label>
@@ -242,13 +301,23 @@
                     
                     <div class="form-row">
                         <label>DURATION</label>
-                        <select id="free-duration-select" class="form-input">
-                            <option value="3Hours">3 Hours (saat)</option>
-                            <option value="1Day">1 Day (gün)</option>
-                            <option value="1Week">1 Week (hafta)</option>
-                            <option value="1Month">1 Month (Ay)</option>
-                        </select>
+                        <div id="free-duration-list" class="duration-list">
+                            <div class="duration-item selected" data-value="3Hours" onclick="selectDuration(this, 'free')">
+                                <span>3 Hours (saat)</span>
+                            </div>
+                            <div class="duration-item" data-value="1Day" onclick="selectDuration(this, 'free')">
+                                <span>1 Day (gün)</span>
+                            </div>
+                            <div class="duration-item" data-value="1Week" onclick="selectDuration(this, 'free')">
+                                <span>1 Week (hafta)</span>
+                            </div>
+                            <div class="duration-item" data-value="1Month" onclick="selectDuration(this, 'free')">
+                                <span>1 Month (Ay)</span>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <input type="hidden" id="free-selected-value" value="3Hours">
 
                     <div class="form-row">
                         <label>MAX DEVICES</label>
@@ -278,9 +347,9 @@
     <script>
         const pageConfigs = {
             'page-1': 'bg-page-1',
-            'page-2': 'bg-page-2', // PUBG Miğferi
-            'page-3a': 'bg-page-3a-new', // Mumya karakterleri
-            'page-3b': 'bg-page-3b-new'  // Mumya karakterleri
+            'page-2': 'bg-page-2',
+            'page-3a': 'bg-page-3a-new', 
+            'page-3b': 'bg-page-3b-new'
         };
 
         const bgOverlay = document.getElementById('bg-overlay');
@@ -299,21 +368,40 @@
             }
 
             bgOverlay.className = 'background-image-overlay'; 
-            // Sayfa 3a için yeni sınıf, 3b için yeni sınıf kullanıldı
+            bgOverlay.classList.add(pageConfigs[targetPage]);
+
+            currentPage = targetPage;
+            
             if (targetPage === 'page-3a') {
-                bgOverlay.classList.add(pageConfigs[targetPage]);
                 updateTotalPrice();
                 updatePremiumDeviceCounter();
             } else if (targetPage === 'page-3b') {
-                bgOverlay.classList.add(pageConfigs[targetPage]);
                 updateFreeDeviceCounter();
-            } else {
-                bgOverlay.classList.add(pageConfigs[targetPage]);
             }
-
-            currentPage = targetPage;
         }
+        
+        // Süre Seçim Fonksiyonu
+        function selectDuration(selectedElement, type) {
+            const listId = `${type}-duration-list`;
+            const hiddenInputId = `${type}-selected-value`;
+            
+            const allItems = document.getElementById(listId).querySelectorAll('.duration-item');
+            allItems.forEach(item => item.classList.remove('selected'));
 
+            selectedElement.classList.add('selected');
+            
+            const selectedValue = selectedElement.getAttribute('data-value');
+            const selectedPrice = selectedElement.getAttribute('data-price');
+            
+            const hiddenInput = document.getElementById(hiddenInputId);
+            hiddenInput.value = selectedValue;
+            
+            if (type === 'premium') {
+                hiddenInput.setAttribute('data-price', selectedPrice);
+                updateTotalPrice();
+            }
+        }
+        
         // GİRİŞ KONTROL FONKSİYONU
         function attemptLogin() {
             const username = document.getElementById('username').value;
@@ -333,10 +421,10 @@
 
         // PREMIUM TOPLAM FİYAT GÜNCELLEME FONKSİYONU
         function updateTotalPrice() {
-            const selectEl = document.getElementById('premium-duration-select');
-            const selectedOption = selectEl.options[selectEl.selectedIndex];
+            const selectedInput = document.getElementById('premium-selected-value');
             
-            const durationPrice = parseFloat(selectedOption.getAttribute('data-price')) || 1; 
+            // Gizli inputtan data-price değerini al
+            const durationPrice = parseFloat(selectedInput.getAttribute('data-price')) || 1; 
 
             const maxDevices = parseInt(document.getElementById('max-devices-premium').value) || 1;
             const bulkNumber = parseInt(document.getElementById('bulk-key-number-premium').value) || 1;
@@ -373,12 +461,14 @@
             const length = 10; 
             let prefix = '';
             
+            // Süre değerini gizli inputtan al
+            const durationValue = document.getElementById(`${type}-selected-value`).value;
+
             if (type === 'premium') {
                 prefix = 'ADM97-';
             } else if (type === 'free') {
-                const durationSelect = document.getElementById('free-duration-select');
-                const selectedDuration = durationSelect.value;
-                prefix = selectedDuration.replace(/[^0-9A-Z]/ig, '') + '-'; 
+                // Key'in başına süreyi ekle (örn: 1Day-, 3Hours-)
+                prefix = durationValue.replace(/[^0-9A-Z]/ig, '') + '-'; 
             }
 
             for (let i = 0; i < length; i++) {
