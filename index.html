@@ -8,7 +8,7 @@
     
     <style>
         /* ======================================================= */
-        /* === CSS STİLLERİ (Yeni Yönetim ve Fiyat Düzeltmeleri Dahil) === */
+        /* === CSS STİLLERİ (Tüm Hatalar Düzeltildi) === */
         /* ======================================================= */
         
         /* Genel Ayarlar ve SPA Yönetimi */
@@ -63,24 +63,22 @@
         .bg-page-2 { background-image: url('asker-miğfer.jpg'); }
         .bg-page-3b { background-image: url('mumya-karakter.jpg'); opacity: 0.5; }
 
-        /* Başlık ve Buton Stilleri (Kısaltıldı) */
+        /* Başlık ve Buton Stilleri */
         .domain-title { font-size: 3em; font-weight: 700; letter-spacing: 5px; text-shadow: 0 0 15px rgba(255, 215, 0, 0.8); margin-bottom: 50px; border-top: 2px solid rgba(255, 215, 0, 0.7); border-bottom: 2px solid rgba(255, 215, 0, 0.7); padding: 10px 0; }
         .pubg-logo-text { font-size: 5em; font-weight: 700; color: #fff; text-shadow: 0 0 10px rgba(0, 0, 0, 0.9); margin-bottom: 20px; border: 5px solid #fff; padding: 5px 20px; letter-spacing: 5px; background-color: rgba(0, 0, 0, 0.3); }
         .form-frame { background: rgba(0, 0, 0, 0.5); border: 3px solid #ffd700; box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); padding: 20px 40px; border-radius: 5px; display: inline-block; }
         .login-input { width: 250px; padding: 15px; margin-bottom: 10px; background-color: rgba(40, 40, 40, 0.9); color: #ffd700; font-size: 1.2em; font-weight: 400; border: 2px solid #ffd700; border-radius: 3px; box-sizing: border-box; text-align: center; font-family: 'Orbitron', sans-serif; }
-        .login-input::placeholder { color: #e0e0e0; opacity: 1; text-align: center; }
         
         /* Tüm Butonlar */
         .action-button, .key-button, .generate-button, .manage-button {
             display: block; width: 250px; padding: 15px 0; margin: 15px auto 0 auto; text-decoration: none; font-size: 1.5em; font-weight: 700; border: none; border-radius: 3px; cursor: pointer; transition: background-color 0.3s, transform 0.3s; box-shadow: 0 5px 15px rgba(255, 215, 0, 0.6); letter-spacing: 2px; background-color: #ffd700; color: #000; font-family: 'Orbitron', sans-serif;
         }
         .key-button { width: 300px; font-size: 1.8em; margin: 10px auto; background-color: #e5b300; border: 2px solid #fff8d7; }
-        .action-button:hover, .key-button:hover, .generate-button:hover, .manage-button:hover { background-color: #ffda47; transform: translateY(-2px); }
 
         /* Yönetim Butonları */
         .manage-button { background-color: #555; color: #ffd700; font-size: 1em; width: 100%; margin-top: 10px; box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
-        .delete-button { background-color: #a00; color: #fff; } /* Kırmızı */
-        .deactive-button { background-color: #0090ff; color: #fff; } /* Mavi */
+        .delete-button { background-color: #a00; color: #fff; } 
+        .deactive-button { background-color: #0090ff; color: #fff; } 
         
         /* Sayfa 3A/3B Ortak ve 3A Stilleri */
         .form-wrapper { align-items: center; min-height: 100vh; padding: 20px; }
@@ -92,43 +90,32 @@
         .total-price-box { text-align: center; padding: 15px; margin: 25px 0; background-color: #ffd700; color: #000; font-weight: 700; font-size: 1.2em; border-radius: 3px; box-shadow: 0 0 10px rgba(255, 215, 0, 0.8); }
         .admin-output { text-align: center; padding: 10px; background-color: #555; color: #fff; font-size: 0.9em; border-radius: 3px; }
 
-        /* --- SAYFA 3A DURATION STİLLERİ (GÜNCELLENDİ) --- */
-        .duration-options-list { 
-            border: 1px solid #ffd700;
-            background-color: #1a1a1a;
-        }
+        /* --- SAYFA 3A DURATION STİLLERİ --- */
+        .duration-options-list { border: 1px solid #ffd700; background-color: #1a1a1a; }
         .duration-item-premium {
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            background-color: #333;
-            border-bottom: 1px solid #444;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            font-size: 1.1em;
-            color: #ccc;
+            padding: 10px; display: flex; justify-content: space-between;
+            background-color: #333; border-bottom: 1px solid #444; cursor: pointer;
+            transition: background-color 0.2s; font-size: 1.1em; color: #ccc;
         }
-        .duration-item-premium:hover {
-            background-color: #444;
-        }
-        .duration-item-premium.selected {
-            background-color: #ffd700;
-            color: #000;
-            font-weight: 700;
-        }
-        .duration-price {
-            font-weight: 700;
-        }
+        .duration-item-premium:last-child { border-bottom: none; }
+        .duration-item-premium:hover { background-color: #444; }
+        .duration-item-premium.selected { background-color: #ffd700; color: #000; font-weight: 700; }
+        .duration-price { font-weight: 700; }
 
-        /* --- SAYFA 3B STİLLERİ (Önceki gibi) --- */
+        /* --- SAYFA 3B STİLLERİ --- */
         .free-keys-container { width: 320px; background-color: #1a1a1a; border: 1px solid #ffd700; border-radius: 5px; box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); padding: 20px; position: relative; text-align: center; }
         .top-corner-header { position: absolute; top: -15px; left: -15px; background-color: #00bcd4; color: #000; padding: 10px 15px; font-size: 1em; font-weight: 700; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 188, 212, 0.8); clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 80% 100%, 0% 100%); }
         .main-title { color: #ffd700; font-size: 1.5em; margin-bottom: 20px; margin-top: 15px; }
         .duration-section { padding: 0; margin-bottom: 20px; background-color: #0d0d0d; }
-        .duration-item-container { border-top: 1px solid #222; padding: 15px 10px; background-color: #1a1a1a; color: #ffd700; font-size: 0.9em; text-align: left; font-weight: 400; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #000; }
+        .duration-item-container { 
+            border-top: 1px solid #222; padding: 15px 10px; background-color: #1a1a1a; 
+            color: #ffd700; font-size: 0.9em; text-align: left; font-weight: 400; 
+            cursor: pointer; display: flex; justify-content: space-between; 
+            align-items: center; border-bottom: 1px solid #000;
+        }
         .duration-item-container:first-child { border-top: none; }
         .duration-item-container:last-child { border-bottom: none; }
-        .duration-item-container.active { background-color: #00bcd4; color: #000; font-weight: 700; }
+        .duration-item-container.selected-free { background-color: #00bcd4; color: #000; font-weight: 700; } /* active yerine selected-free kullandık */
         .duration-item-container .arrow-icon { font-size: 1.2em; font-weight: 900; }
         .key-output { text-align: center; padding: 10px; background-color: #555; color: #fff; font-size: 0.9em; border-radius: 3px; border: 1px solid #555; }
 
@@ -260,28 +247,24 @@
                 
                 <form class="key-form" onsubmit="event.preventDefault()">
                     
-                    <div class="duration-section">
-                        <div class="duration-item-container active">
-                            <span>DURATION</span>
-                            <span class="arrow-icon">^</span>
-                        </div>
-                        <div class="duration-item-container">
+                    <div class="duration-section" id="free-duration-list">
+                        <div class="duration-item-container selected-free" onclick="selectFreeDuration(this)">
                             <span>3 Hours (saat)</span>
                             <span class="arrow-icon">^</span>
                         </div>
-                        <div class="duration-item-container">
+                        <div class="duration-item-container" onclick="selectFreeDuration(this)">
                             <span>1 Day (gün)</span>
                             <span class="arrow-icon">^</span>
                         </div>
-                        <div class="duration-item-container">
+                        <div class="duration-item-container" onclick="selectFreeDuration(this)">
                             <span>1 Week (hafta)</span>
                             <span class="arrow-icon">^</span>
                         </div>
-                        <div class="duration-item-container">
+                        <div class="duration-item-container" onclick="selectFreeDuration(this)">
                             <span>1 Month (Ay)</span>
                             <span class="arrow-icon">^</span>
                         </div>
-                    </div>
+                        </div>
                     
                     <button type="button" onclick="generateKey('free')" class="generate-button" style="width: 100%; margin: 15px 0 5px 0;">
                         GENERATE FREE KEY
@@ -329,7 +312,6 @@
 
             currentPage = targetPage;
             
-            // Sayfa 3A'ya geçildiğinde fiyatı güncelle
             if (targetPage === 'page-3a') {
                 updateTotalPrice();
             }
@@ -352,35 +334,37 @@
             }
         }
 
-        // YENİ: PREMIUM DURATION SEÇİM FONKSİYONU
+        // PREMIUM DURATION SEÇİM FONKSİYONU
         function selectPremiumDuration(selectedElement) {
             const list = document.getElementById('premium-duration-list');
             const items = list.querySelectorAll('.duration-item-premium');
 
-            // Tüm seçimleri kaldır
             items.forEach(item => item.classList.remove('selected'));
-
-            // Seçileni işaretle
             selectedElement.classList.add('selected');
             
-            // Fiyatı güncelle
             updateTotalPrice();
         }
+        
+        // FREE DURATION SEÇİM FONKSİYONU
+        function selectFreeDuration(selectedElement) {
+            const list = document.getElementById('free-duration-list');
+            const items = list.querySelectorAll('.duration-item-container');
 
-        // YENİ: TOPLAM FİYAT GÜNCELLEME FONKSİYONU
+            items.forEach(item => item.classList.remove('selected-free'));
+            selectedElement.classList.add('selected-free');
+        }
+
+
+        // TOPLAM FİYAT GÜNCELLEME FONKSİYONU
         function updateTotalPrice() {
-            // Seçili olan sürenin fiyatını bul
             const selectedItem = document.querySelector('.duration-item-premium.selected');
             const durationPrice = selectedItem ? parseFloat(selectedItem.getAttribute('data-price')) : 0;
 
-            // Diğer giriş değerlerini al
             const maxDevices = parseInt(document.getElementById('max-devices-premium').value) || 1;
             const bulkNumber = parseInt(document.getElementById('bulk-key-number-premium').value) || 1;
 
-            // Toplam fiyatı hesapla (Basit bir çarpım)
             const totalPrice = durationPrice * maxDevices * bulkNumber;
 
-            // Fiyatı ekranda göster
             document.getElementById('total-price-span').textContent = totalPrice.toFixed(0);
         }
 
