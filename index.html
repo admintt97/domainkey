@@ -8,7 +8,7 @@
     
     <style>
         /* ======================================================= */
-        /* === CSS STİLLERİ (YENİ ALTIN ÇERÇEVE STİLİ UYGULANDI) === */
+        /* === CSS STİLLERİ (TÜM GÖRSEL VE FONKSİYONEL HATALAR GİDERİLDİ) === */
         /* ======================================================= */
         
         /* Genel Ayarlar ve SPA Yönetimi */
@@ -35,77 +35,115 @@
         .domain-title { font-size: 3em; font-weight: 700; letter-spacing: 5px; text-shadow: 0 0 15px rgba(255, 215, 0, 0.8); margin-bottom: 50px; border-top: 2px solid rgba(255, 215, 0, 0.7); border-bottom: 2px solid rgba(255, 215, 0, 0.7); padding: 10px 0; }
         .pubg-logo-text { font-size: 5em; font-weight: 700; color: #fff; text-shadow: 0 0 10px rgba(0, 0, 0, 0.9); margin-bottom: 20px; border: 5px solid #fff; padding: 5px 20px; letter-spacing: 5px; background-color: rgba(0, 0, 0, 0.3); }
         
-        /* Genel Form ve Input Stilleri */
-        .login-input { width: 250px; padding: 15px; margin-bottom: 10px; background-color: rgba(40, 40, 40, 0.9); color: #ffd700; font-size: 1.2em; font-weight: 400; border: 2px solid #ffd700; border-radius: 3px; box-sizing: border-box; text-align: center; font-family: 'Orbitron', sans-serif; }
-        .form-input, select.form-input { width: 100%; padding: 10px; background-color: #333; border: 1px solid #ffd700; color: #fff; font-size: 1em; box-sizing: border-box; border-radius: 3px; font-family: 'Orbitron', sans-serif; }
+        /* GENEL INPUT STİLİ */
+        .login-input, .form-input, select.form-input { 
+            width: 100%; padding: 15px; margin-bottom: 10px; background-color: rgba(40, 40, 40, 0.9); 
+            color: #ffd700; font-size: 1.2em; font-weight: 400; 
+            border: 2px solid #ffd700; border-radius: 3px; box-sizing: border-box; 
+            text-align: center; font-family: 'Orbitron', sans-serif;
+            -webkit-appearance: none; /* iOS için stil düzeltmesi */
+            -moz-appearance: none; /* Firefox için stil düzeltmesi */
+            appearance: none; /* Modern tarayıcılar için stil düzeltmesi */
+        }
         .form-row label { display: block; font-size: 0.8em; color: #ccc; margin-bottom: 5px; font-weight: 700; }
 
-        /* Tüm Butonlar (GENERATE, LOGIN, KEY SELECT) */
-        .action-button, .key-button, .generate-button, .manage-button {
-            display: block; width: 250px; padding: 15px 0; margin: 15px auto 0 auto; text-decoration: none; font-size: 1.5em; font-weight: 700; border: none; border-radius: 3px; cursor: pointer; transition: background-color 0.3s, transform 0.3s; 
-            background-color: #ffd700; color: #000; font-family: 'Orbitron', sans-serif;
-            /* Yeni Altın Stil */
-            border: 1px solid #ffaa00;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.7), inset 0 0 5px rgba(255, 255, 100, 0.5); 
+        /* GÜÇLENDİRİLMİŞ ALTIN BUTON STİLİ */
+        .action-button, .key-button, .generate-button {
+            display: block; padding: 15px 0; margin: 15px auto 0 auto; text-decoration: none; 
+            font-size: 1.5em; font-weight: 700; border: none; border-radius: 3px; cursor: pointer; 
+            transition: background-color 0.3s, transform 0.3s; 
+            background-color: #ffaa00; /* Daha koyu altın */
+            color: #000; font-family: 'Orbitron', sans-serif;
+            
+            /* Altın Efektini Güçlendir */
+            border: 1px solid #fff8e1;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 1.0), inset 0 0 8px rgba(255, 255, 100, 0.8); 
             text-shadow: 0 0 3px #000;
         }
         .key-button { width: 300px; font-size: 1.8em; margin: 10px auto; }
         
-        /* Yönetim Butonları (Renkler Korundu) */
+        /* Sayfa 3 Butonlarının Boyutunu Küçülttük */
+        .generate-button { width: 100%; margin: 15px 0 5px 0; font-size: 1.2em; padding: 12px 0; } 
+        
+        /* YÖNETİM BUTONLARI (Boyut Küçültüldü) */
         .manage-button { 
-            background-color: #444; color: #ffd700; font-size: 1em; width: 100%; margin-top: 10px; 
-            border: 1px solid #ffd700; /* Yönetim butonlarının altını biraz daha sade */
-            box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+            font-size: 1em; width: 100%; margin-top: 5px; padding: 10px 0; 
+            border-radius: 3px; cursor: pointer; transition: background-color 0.3s;
+            font-weight: 700; font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
         }
-        .delete-button { background-color: #a00; color: #fff; border: 1px solid #ff4747; } 
-        .deactive-button { background-color: #0090ff; color: #fff; border: 1px solid #00c0ff; } 
-        .delete-button:hover, .deactive-button:hover { transform: none; background-color: #c00; }
+        .delete-button { background-color: #a00; border: 1px solid #ff4747; } 
+        .deactive-button { background-color: #0090ff; border: 1px solid #00c0ff; } 
+        .delete-button:hover, .deactive-button:hover { transform: none; }
 
-        /* --- SAYFA 1 & 2: GİRİŞ VE KEY SEÇİM ÇERÇEVESİ (Yeni Stil) --- */
-        .form-frame, .key-buttons-frame {
-            background: rgba(0, 0, 0, 0.6); 
-            padding: 20px 40px; border-radius: 5px; display: inline-block;
-            /* Yeni Altın Çerçeve Stili */
+        /* --- TÜM FORM ÇERÇEVELERİ (Sayfa 1, 2, 3A, 3B) --- */
+        .form-frame, .key-buttons-frame, .premium-keys-container, .free-keys-container {
+            background: rgba(0, 0, 0, 0.7); 
+            padding: 25px 40px; 
+            border-radius: 5px; 
+            display: inline-block;
             border: 3px solid #ffaa00; 
             box-shadow: 0 0 25px rgba(255, 215, 0, 0.9), inset 0 0 10px rgba(255, 255, 150, 0.5);
         }
         .key-buttons-frame { padding: 30px 50px; }
+        .premium-keys-container { width: 350px; text-align: left; }
+        .free-keys-container { width: 320px; text-align: left; } /* İçeriği sola yasladık */
 
-        /* --- SAYFA 3A: PREMIUM KEYS FORMU (Yeni Stil) --- */
-        .premium-keys-container { 
-            width: 350px; padding: 30px 20px; position: relative; text-align: left;
-            /* Yeni Altın Çerçeve Stili */
-            background: rgba(0, 0, 0, 0.6); 
-            border: 3px solid #ffaa00; 
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.9), inset 0 0 10px rgba(255, 255, 150, 0.5);
-            border-radius: 5px; /* Köşeleri yuvarla */
-        }
+        /* Başlıklar ve Fiyat Kutusu Stili */
         .premium-header { 
             position: absolute; top: -10px; right: 10px; background-color: #ffaa00; color: #000; 
             padding: 8px 15px; font-size: 0.9em; font-weight: 700; border-radius: 3px; 
             box-shadow: 0 0 5px #ffd700; 
         }
-
-        /* --- SAYFA 3B: FREE KEYS FORMU (Yeni Stil) --- */
-        .free-keys-container { 
-            width: 320px; padding: 20px; position: relative; text-align: center;
-            /* Yeni Altın Çerçeve Stili */
-            background: rgba(0, 0, 0, 0.6); 
-            border: 3px solid #ffaa00; 
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.9), inset 0 0 10px rgba(255, 255, 150, 0.5);
-            border-radius: 5px;
-        }
         .top-corner-header { 
             position: absolute; top: -10px; left: 10px; background-color: #00bcd4; color: #000; 
             padding: 10px 15px; font-size: 1em; font-weight: 700; border-radius: 3px; 
-            box-shadow: 0 0 10px rgba(0, 188, 212, 0.8); clip-path: none; /* Üçgen şeklini kaldırdık */
+            box-shadow: 0 0 10px rgba(0, 188, 212, 0.8); 
         }
-
-        /* Diğer Altın Stilleri (Korundu) */
-        .total-price-box { text-align: center; padding: 15px; margin: 25px 0; background-color: #ffd700; color: #000; font-weight: 700; font-size: 1.2em; border-radius: 3px; box-shadow: 0 0 10px rgba(255, 215, 0, 0.8); }
+        .total-price-box { 
+            text-align: center; padding: 15px; margin: 25px 0; background-color: #ffd700; 
+            color: #000; font-weight: 700; font-size: 1.2em; border-radius: 3px; 
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.8); 
+        }
         
+        /* Sayfa 3A: Premium Süre Seçim Listesi (Görseldeki gibi liste formatına zorlandı) */
+        .duration-options-list { border: 1px solid #ffd700; background-color: #1a1a1a; margin-bottom: 10px; }
+        .duration-item-premium { 
+            padding: 10px; display: flex; justify-content: space-between; 
+            background-color: #333; border-bottom: 1px solid #444; cursor: pointer; 
+            transition: background-color 0.2s; font-size: 1.1em; color: #ccc; 
+            line-height: 1.5; /* Metin dikey olarak ortalandı */
+        }
+        .duration-item-premium:last-child { border-bottom: none; }
         .duration-item-premium.selected { background-color: #ffd700; color: #000; font-weight: 700; }
-        .duration-item-container.selected-free { background-color: #00bcd4; color: #000; font-weight: 700; }
+        .duration-price { color: #ffd700; font-weight: 700; }
+        .duration-item-premium.selected .duration-price { color: #000; }
+
+
+        /* Sayfa 3B: Free Key Açılır Menüsü (Tek Tuş İstediğiniz İçin) */
+        #free-duration-select {
+            width: 100%;
+            padding: 15px; 
+            background-color: #333;
+            color: #ffd700;
+            border: 2px solid #ffd700;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            text-align: left;
+            cursor: pointer;
+            box-sizing: border-box;
+            border-radius: 3px;
+        }
+        
+        .admin-output { 
+            text-align: center; padding: 10px; background-color: #555; color: #fff; 
+            font-size: 1em; border-radius: 3px; margin-top: 10px;
+        }
+        .key-output { 
+            text-align: center; padding: 10px; background-color: #555; color: #fff; 
+            font-size: 1em; border-radius: 3px; margin-top: 10px;
+        }
 
         .back-button {
             position: absolute; top: 10px; left: 10px; padding: 10px;
@@ -208,7 +246,7 @@
                         TOTAL PRICE: $<span id="total-price-span">1</span>
                     </div>
 
-                    <button type="button" onclick="generateKey('premium')" class="generate-button" style="width: 100%; margin-top: 0;">
+                    <button type="button" onclick="generateKey('premium')" class="generate-button">
                         GENERATE PREMIUM KEY
                     </button>
                     
@@ -219,7 +257,7 @@
                         DELETE KEY
                     </button>
 
-                    <div id="premium-key-output" class="admin-output" style="margin-top: 10px;">Admin97-qzwxye</div>
+                    <div id="premium-key-output" class="admin-output">Admin97-qzwxye</div>
                 </form>
             </div>
         </div>
@@ -235,37 +273,28 @@
                 
                 <form class="key-form" onsubmit="event.preventDefault()">
                     
-                    <div class="duration-section" id="free-duration-list">
-                        <div class="duration-item-container selected-free" onclick="selectFreeDuration(this)">
-                            <span>3 Hours (saat)</span>
-                            <span class="arrow-icon">^</span>
-                        </div>
-                        <div class="duration-item-container" onclick="selectFreeDuration(this)">
-                            <span>1 Day (gün)</span>
-                            <span class="arrow-icon">^</span>
-                        </div>
-                        <div class="duration-item-container" onclick="selectFreeDuration(this)">
-                            <span>1 Week (hafta)</span>
-                            <span class="arrow-icon">^</span>
-                        </div>
-                        <div class="duration-item-container" onclick="selectFreeDuration(this)">
-                            <span>1 Month (Ay)</span>
-                            <span class="arrow-icon">^</span>
-                        </div>
+                    <div class="form-row">
+                        <label>DURATION</label>
+                        <select id="free-duration-select" class="form-input">
+                            <option value="3Hours">3 Hours (saat)</option>
+                            <option value="1Day">1 Day (gün)</option>
+                            <option value="1Week">1 Week (hafta)</option>
+                            <option value="1Month">1 Month (Ay)</option>
+                        </select>
                     </div>
                     
-                    <button type="button" onclick="generateKey('free')" class="generate-button" style="width: 100%; margin: 15px 0 5px 0;">
+                    <button type="button" onclick="generateKey('free')" class="generate-button">
                         GENERATE FREE KEY
                     </button>
 
-                    <button type="button" onclick="manageKey('free', 'deactive')" class="manage-button deactive-button" style="width: 100%;">
+                    <button type="button" onclick="manageKey('free', 'deactive')" class="manage-button deactive-button">
                         DEACTIVE KEY
                     </button>
-                    <button type="button" onclick="manageKey('free', 'delete')" class="manage-button delete-button" style="width: 100%;">
+                    <button type="button" onclick="manageKey('free', 'delete')" class="manage-button delete-button">
                         DELETE KEY
                     </button>
                     
-                    <div id="free-key-output" class="key-output" style="width: 100%; box-sizing: border-box; margin-top: 10px;">1Dfree-rtyujk</div>
+                    <div id="free-key-output" class="key-output">1Dfree-rtyujk</div>
                 </form>
             </div>
         </div>
@@ -333,20 +362,13 @@
             updateTotalPrice();
         }
         
-        // FREE DURATION SEÇİM FONKSİYONU
-        function selectFreeDuration(selectedElement) {
-            const list = document.getElementById('free-duration-list');
-            const items = list.querySelectorAll('.duration-item-container');
-
-            items.forEach(item => item.classList.remove('selected-free'));
-            selectedElement.classList.add('selected-free');
-        }
-
+        // FREE DURATION SEÇİM FONKSİYONU - Artık Select kullanıldığı için bu fonksiyona gerek yok.
 
         // TOPLAM FİYAT GÜNCELLEME FONKSİYONU
         function updateTotalPrice() {
             const selectedItem = document.querySelector('.duration-item-premium.selected');
-            const durationPrice = selectedItem ? parseFloat(selectedItem.getAttribute('data-price')) : 0;
+            // Data attribute'ü yoksa varsayılan 1$'ı kullan.
+            const durationPrice = selectedItem ? parseFloat(selectedItem.getAttribute('data-price')) : 1; 
 
             const maxDevices = parseInt(document.getElementById('max-devices-premium').value) || 1;
             const bulkNumber = parseInt(document.getElementById('bulk-key-number-premium').value) || 1;
@@ -363,21 +385,23 @@
             let result = '';
             
             const length = 10; 
-            const prefix = (type === 'premium') ? 'ADM97-' : 'FREE-';
+            let prefix = (type === 'premium') ? 'ADM97-' : 'FREE-';
             
+            if (type === 'free') {
+                const durationSelect = document.getElementById('free-duration-select');
+                const selectedDuration = durationSelect.value;
+                prefix = selectedDuration.replace(/[^0-9A-Z]/ig, '') + '-'; // Sadece rakam ve harf al
+            }
+
             for (let i = 0; i < length; i++) {
                 result += characters.charAt(Math.floor(Math.random() * characters.length));
             }
             
             const finalKey = prefix + result;
 
-            if (type === 'premium') {
-                document.getElementById('premium-key-output').textContent = finalKey;
-                document.getElementById('premium-key-output').style.backgroundColor = '#555';
-            } else if (type === 'free') {
-                document.getElementById('free-key-output').textContent = finalKey;
-                document.getElementById('free-key-output').style.backgroundColor = '#555';
-            }
+            const outputElement = document.getElementById(`${type}-key-output`);
+            outputElement.textContent = finalKey;
+            outputElement.style.backgroundColor = '#555';
         }
 
         // ANAHTAR YÖNETİM FONKSİYONU
